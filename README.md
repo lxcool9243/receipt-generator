@@ -1,73 +1,130 @@
-# React + TypeScript + Vite
+# Receipt Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive web application for generating professional restaurant receipts with customizable items, taxes, and formatting options.
 
-Currently, two official plugins are available:
+![Receipt Generator Preview](docs/preview.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- 🧾 Generate professional restaurant receipts
+- 💰 Dynamic item management with quantity and pricing
+- 📊 Flexible tax calculation system
+- 💵 Support for both dot and comma decimal separators
+- 🖨️ Export receipts as PDF
+- 📱 Responsive design for all devices
+- 🎨 Clean and modern user interface
+- ⚡ Real-time preview
+- 🔄 Customizable receipt fields
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Technologies Used
 
-## Expanding the ESLint configuration
+- React 18+
+- TypeScript
+- Tailwind CSS
+- html2canvas
+- jsPDF
+- Vite
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
+### Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Node.js 16+ installed
+- npm or yarn package manager
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/lxcool9243/receipt-generator.git
+cd receipt-generator
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn
+```
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+3. Start the development server:
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+4. Open your browser and visit `http://localhost:5173`
+
+## Usage
+
+1. **Basic Information**
+   - Fill in the restaurant details
+   - Set order number and dining type
+   - Add host name and billing date/time
+
+2. **Managing Items**
+   - Click "Add Item" to add new items
+   - Set quantity, item name, and price
+   - Remove items using the delete button
+
+3. **Tax Configuration**
+   - Add multiple tax rates
+   - Customize tax names and percentages
+   - Remove unnecessary taxes
+
+4. **Formatting Options**
+   - Toggle between dot and comma decimal separators
+   - Customize footer text
+   - Preview changes in real-time
+
+5. **Generating PDF**
+   - Click "DOWNLOAD RECEIPT" to generate PDF
+   - PDF maintains exact formatting as preview
+
+## Project Structure
+
+```
+receipt-generator/
+├── src/
+│   ├── components/
+│   │   ├── ItemInputs.tsx
+│   │   ├── TaxInputs.tsx
+│   │   ├── ReceiptForm.tsx
+│   │   ├── ReceiptHeader.tsx
+│   │   ├── ReceiptTable.tsx
+│   │   ├── ReceiptFooter.tsx
+│   │   └── ReceiptPreview.tsx
+│   ├── types/
+│   │   └── receipt.ts
+│   ├── utils/
+│   │   └── calculations.ts
+│   ├── App.tsx
+│   └── main.tsx
+├── public/
+├── index.html
+└── package.json
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/AmazingFeature`
+3. Commit your changes: `git commit -m 'Add some AmazingFeature'`
+4. Push to the branch: `git push origin feature/AmazingFeature`
+5. Open a pull request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Built with ❤️ using React and TypeScript
+- Styling powered by Tailwind CSS
+- PDF generation handled by html2canvas and jsPDF
+
+---
+
+Made with ❤️ by [lxcool9243](https://github.com/lxcool9243)
 ```
