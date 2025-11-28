@@ -53,7 +53,7 @@ export const ItemInputs = ({
       <button
         type="button"
         onClick={onAddItem}
-        className="bg-blue-500 text-white text-xs px-2 py-1 rounded cursor-pointer"
+        className="bg-blue-700 hover:bg-blue-500 text-white px-2 py-1 rounded text-xs cursor-pointer transition duration-500 ease-in-out"
       >
         + Add Item
       </button>

@@ -20,7 +20,7 @@ export const ReceiptPreview = forwardRef(
     return (
       <div
         ref={ref}
-        className="bg-white shadow font-mono text-xs mx-auto min-w-[320px] w-[330px] py-10 px-6"
+        className="bg-white shadow font-mono text-xs min-w-[320px] w-[330px] py-10 px-6"
         style={{
           minHeight: "590px",
           maxWidth: "330px",

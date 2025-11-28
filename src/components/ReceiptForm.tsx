@@ -6,7 +6,7 @@ interface ReceiptFormProps {
   receipt: Receipt;
   onReceiptChange: (
     field: keyof Receipt,
-    value: Receipt[keyof Receipt],
+    value: Receipt[keyof Receipt]
   ) => void;
   onSetItem: (idx: number, key: keyof Item, val: Item[keyof Item]) => void;
   onAddItem: () => void;
@@ -33,7 +33,7 @@ export const ReceiptForm = ({
   onDownloadPDF,
 }: ReceiptFormProps) => {
   return (
-    <form className="flex flex-col max-w-[400px] w-full bg-white shadow-lg rounded-xl px-6 py-7 space-y-2">
+    <form className="flex flex-col max-w-[400px] w-full bg-white shadow rounded px-6 py-7 space-y-2">
       <div className="flex gap-4">
         <div className="flex-1">
           <label className="text-xs font-semibold">Order Type:</label>
@@ -148,7 +148,7 @@ export const ReceiptForm = ({
       </div>
       <button
         type="button"
-        className="w-full bg-blue-700 text-white px-4 py-2 rounded text-xs font-bold cursor-pointer"
+        className="w-full bg-blue-700 hover:bg-blue-500 text-white px-4 py-2 rounded text-xs font-bold cursor-pointer transition duration-500 ease-in-out"
         onClick={onDownloadPDF}
       >
         DOWNLOAD RECEIPT

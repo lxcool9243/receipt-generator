@@ -1,48 +1,22 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { useRef, useState } from "react";
-import type { Receipt, Item, Tax } from "./types/receipt";
 import { ReceiptForm } from "./components/ReceiptForm";
 import { ReceiptPreview } from "./components/ReceiptPreview";
+import { amountStates } from "./constants/amountStates";
+import type { Item, Receipt, Tax } from "./types/receipt";
 import {
-  formatNumber,
   calculateSubtotal,
   calculateTaxes,
   calculateTotal,
+  formatNumber,
 } from "./utils/calculations";
 
-const initialReceipt: Receipt = {
-  orderNo: "493",
-  dineType: "Dine In",
-  host: "DHARAMRAJ",
-  date: "2025-09-25",
-  time: "02:30:21 PM",
-  restaurant: "PUNJABI TADKA & GRILL",
-  locality: "SANT NAGAR, BURARI",
-  address: "DELHI - 110084",
-  items: [
-    { qty: 2, name: "Tandoor Platter Veg", price: 985 },
-    { qty: 1, name: "Non Veg Tex Mex Platter", price: 985 },
-    { qty: 2, name: "Mineral Water", price: 99 },
-  ],
-  taxes: [
-    { label: "CGST", value: 2.5 },
-    { label: "SGST", value: 2.5 },
-    { label: "S.CHARGE", value: 10 },
-  ],
-  paymentType: "CASH",
-  customerCopy: `Customer Copy
-
-Thanks for visiting
-
-PUNJABI TADKA & GRILL`,
-  showBarcode: false,
-  thankDisplay: false,
-};
-
 const App = () => {
-  const [receipt, setReceipt] = useState<Receipt>(initialReceipt);
-
+  const [activeLabel, setActiveLabel] = useState<string>(
+    amountStates?.[0]?.label
+  );
+  const [receipt, setReceipt] = useState<Receipt>(amountStates?.[0]?.state);
   const [commaSep, setCommaSep] = useState(false);
   const receiptRef = useRef<HTMLDivElement>(null);
 
@@ -96,30 +70,47 @@ const App = () => {
   };
 
   return (
-    <div className="flex justify-center items-start min-h-screen bg-gray-100">
-      <div className="flex gap-8 py-5 w-full max-w-5xl">
-        <ReceiptForm
-          receipt={receipt}
-          onReceiptChange={handleInput}
-          onSetItem={setItem}
-          onAddItem={addItem}
-          onDeleteItem={delItem}
-          onSetTax={setTax}
-          onAddTax={addTax}
-          onDeleteTax={delTax}
-          onCommaSepChange={setCommaSep}
-          commaSep={commaSep}
-          onDownloadPDF={downloadPDF}
-        />
-        <div className="flex-1 flex flex-col items-center justify-start py-8">
-          <ReceiptPreview
-            ref={receiptRef}
+    <div className="flex justify-center items-start min-h-screen">
+      <div className="py-5 w-full max-w-5xl">
+        <div className="w-full overflow-scroll flex flex-row gap-x-5 py-5 px-3 md:px-0 mb-5">
+          {amountStates.map((a) => (
+            <div
+              onClick={() => {
+                setActiveLabel(a.label);
+                setReceipt(a.state);
+              }}
+              className={`min-w-28 text-center p-3 bg-white rounded cursor-pointer transition duration-700 ease-in-out select-none ${
+                a.label === activeLabel ? "shadow-lg font-semibold" : "shadow"
+              }`}
+            >
+              {a.label}
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-between gap-8 px-3 md:px-0">
+          <ReceiptForm
             receipt={receipt}
-            subtotal={subtotal}
-            taxAmounts={taxAmts}
-            total={total}
-            formatNumber={(v) => formatNumber(v, commaSep)}
+            onReceiptChange={handleInput}
+            onSetItem={setItem}
+            onAddItem={addItem}
+            onDeleteItem={delItem}
+            onSetTax={setTax}
+            onAddTax={addTax}
+            onDeleteTax={delTax}
+            onCommaSepChange={setCommaSep}
+            commaSep={commaSep}
+            onDownloadPDF={downloadPDF}
           />
+          <div className="flex-1 flex flex-col items-end justify-start">
+            <ReceiptPreview
+              ref={receiptRef}
+              receipt={receipt}
+              subtotal={subtotal}
+              taxAmounts={taxAmts}
+              total={total}
+              formatNumber={(v) => formatNumber(v, commaSep)}
+            />
+          </div>
         </div>
       </div>
     </div>
